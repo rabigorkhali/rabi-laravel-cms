@@ -1,7 +1,7 @@
 
 
 ## About 
-It offers a comprehensive suite of tools and resources to facilitate the organization and dissemination of critical information. Whether you're a student, faculty member, or administrative staff, you'll find easy access to academic schedules, course materials, college announcements, and more. Our goal is to enhance the efficiency of information flow within the college, supporting both academic and operational excellence.
+This is my free backend admin system with base features like user, roles, permission, website configurations in laravel 11.
 
 ## Setup
 - Clone the repo
