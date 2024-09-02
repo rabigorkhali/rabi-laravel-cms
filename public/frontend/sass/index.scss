@@ -1,0 +1,249 @@
+// Variables
+$secondary-color: #f5f5f5;
+$footer-color: #00AEEF;
+$primary-text-color: #302727;
+$secondary-text-color: #988888;
+// $secondary-text-color: #817A7A;
+$tertiary-text-color: #FFFFFF;
+$font-weight-regular: 400;
+$font-weight-bold: 700;
+
+// Font declarations
+@font-face {
+  font-family: "Acumin Pro";
+  src: url("../font/AcuminProRegular.otf");
+}
+
+@font-face {
+  font-family: "Acumin Pro";
+  src: url("../font/AcuminProBold.otf");
+  font-weight: $font-weight-bold;
+}
+
+// Import Bootstrap
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+
+// Base styles
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Acumin Pro";
+  color: $primary-text-color;
+  overflow-x: hidden;
+}
+
+// Sections
+section {
+  padding-inline: 135px;
+  margin-bottom: 80px;
+}
+
+a {
+  text-decoration: none;
+}
+
+// Typography
+h1, h2, h3, h4 {
+  font-weight: $font-weight-bold;
+  margin: 0;
+}
+
+h2 {
+  font-size: 36px;
+  line-height: 46.8px;
+  margin-bottom: 32px;
+}
+
+h3 {
+  font-size: 20px;
+  line-height: 26px;
+  padding-bottom: 16px;
+  color: $primary-text-color;
+}
+
+p {
+  font-size: 16px;
+  font-weight: $font-weight-regular;
+  line-height: 20.8px;
+  text-align: justify;
+  margin: 0;
+}
+
+// Landing Styling
+.landing {
+    background: url(../images/landing/banner.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 643px;
+
+    > .container > .row:first-child > div {
+      padding: 32px 0 50.91px;
+  
+      ul {
+        gap: 32px;
+        list-style: none;
+        margin: 0;
+        font-size: 14px;
+        font-weight: $font-weight-regular;
+  
+        li {
+          color: $primary-text-color;
+        }
+      }
+    }
+  
+    > .container > .row:nth-child(2) > div {
+      h1 {
+        font-size: 50px;
+        line-height: 65px;
+        padding-bottom: 32px;
+        width: 80vw;
+      }
+
+      p {
+        max-width: 570px;
+      }
+    }
+  }
+
+// About Us Styling
+.about-us {
+  p {
+    text-align: justify;
+    margin-bottom: 2rem;
+  }
+}
+
+// Programs and Initiatives Styling
+.prog-initiative {
+  a {
+    > div:first-of-type {
+      border-radius: 20px 20px 0 0;
+
+      &.green {
+        background-color: #81bb88;
+      }
+
+      &.blue {
+        background-color: #00aeef;
+      }
+
+      &.purple {
+        background-color: #886baf;
+      }
+
+      &.pink {
+        background-color: #f05377;
+      }
+
+      &.black {
+        background-color: #333333;
+      }
+    }
+
+    > div:last-of-type {
+      border-radius: 0 0 20px 20px;
+      min-height: 176px;
+
+      .p-3 {
+        p {
+          color: $secondary-text-color;
+          text-align: center;
+          padding-inline: 1.2rem;
+        }
+      }
+    }
+  }
+}
+
+// Get Involved Styling
+.get-involved {
+  background-color: $secondary-color;
+
+  a {
+    color: $footer-color;
+
+    img {
+      margin-left: 8px;
+      padding-bottom: 2px;
+    }
+  }
+}
+
+// Events Styling
+.events {
+  a {
+    position: relative;
+
+    > div:first-child {
+      width: 73px;
+      height: 67px;
+      position: absolute;
+      right: 10%;
+      bottom: 70%;
+      background-color: $secondary-color;
+      text-align: center;
+      
+      p {
+        font-size: 12px;
+        line-height: 19px;
+        color: $secondary-text-color;
+      }
+    }
+  }
+  
+  .p-3 {
+    h4 {
+      font-size: 16px;
+      line-height: 19.2px;
+      padding-bottom: 12px;
+      color: $primary-text-color;
+    }
+
+    p {
+      color: $secondary-text-color;
+      line-height: 24px;
+    }
+  }
+}
+
+// Footer Styling
+footer { 
+  height: 192px;
+  background-color: $footer-color;
+
+  p {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 35.28px;
+    color: $tertiary-text-color;
+    text-wrap: nowrap;
+  }
+}
+
+// Mobile Layout
+@media all and (min-width: 320px) and (max-width: 768px) {
+    section {
+        padding-inline: 20px;
+    }
+
+    .landing {
+      h1 {
+        font-size: 40px !important;
+      }
+
+      p {
+        min-width: 80vw;
+      }
+    }
+
+    footer {
+      .row {
+        gap: 20px;
+      }
+
+      p {
+        font-size: 20px;
+      }
+    }
+}
