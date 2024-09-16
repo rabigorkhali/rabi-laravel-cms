@@ -33,8 +33,12 @@ Route::post('password/reset', [App\Http\Controllers\Auth\ResetPasswordController
 
 Route::prefix(getSystemPrefix())->middleware(['auth', 'permission.routes'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home.index');
+    Route::get('/admin', [HomeController::class, 'index'])->name('home.index');
+    Route::get('/login', [HomeController::class, 'index'])->name('home.index');
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::resource('/profile', ProfileController::class)->except(['show']);
+    Route::get('/change-password', [ProfileController::class,'changePassword'])->name('change.password');
+    Route::put('/change-password', [ProfileController::class,'changePasswordUpdate'])->name('change.password.update');
     Route::resource('/configs', ConfigController::class)->except(['show']);//configs.index, configs.create, configs.store, configs.show, configs.edit, configs.update, configs.destroy
     Route::resource('/users', UserController::class, ['except' => ['show']]);
     Route::resource('/roles', RoleController::class, ['except' => ['show']]);

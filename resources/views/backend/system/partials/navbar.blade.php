@@ -77,6 +77,12 @@
                         </a>
                     </li>
                     <li>
+                        <a class="dropdown-item" href="{{route('change.password')}}">
+                            <i class="ti ti-eye me-2 ti-sm"></i>
+                            <span class="align-middle">{{__('Change Password')}}</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="dropdown-item" href="{{route('configs.index')}}">
                             <i class="ti ti-settings me-2 ti-sm"></i>
                             <span class="align-middle">Settings</span>

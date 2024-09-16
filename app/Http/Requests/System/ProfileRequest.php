@@ -26,17 +26,12 @@ class ProfileRequest extends FormRequest
         $validation = [
             'name' => 'required|string|max:255|min:3',
             'email' => 'required|email|max:255|unique:users,email,' . authUser()->id,
-            'password' => 'required|nullable|string|min:8|confirmed',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
             'phone_number' => 'nullable|string|max:15|min:6',
             'date_of_birth' => 'nullable|date|before:today',
             'gender' => 'nullable|string|in:male,female,other',
             'address' => 'nullable|string|max:255',
         ];
-
-        if ($this->method() == 'PUT') {
-            $validation['password'] = 'nullable|string|min:8|confirmed';
-        }
         return $validation;
     }
 

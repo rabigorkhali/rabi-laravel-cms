@@ -80,24 +80,6 @@
                                      class="img-fluid"></a>
                         </div>
                     @endif
-                    <hr>
-                    <div class="col-md-6">
-                        <label class="form-label" for="password">{{ 'Password' }}</label>
-                        <input value="" type="password" name="password" id="password"
-                               class="form-control @if ($errors->first('password')) is-invalid @endif"
-                               placeholder="Password"/>
-                        <div class="invalid-feedback">{{ $errors->first('password') }}</div>
-                        <span
-                            class="text-muted small">{{ __('Leave empty if you don’t want to change the password.') }}</span>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label" for="password_confirmation">{{ 'Confirm Password' }}</label>
-                        <input value="" type="password" name="password_confirmation" id="password_confirmation"
-                               class="form-control @if ($errors->first('password_confirmation')) is-invalid @endif"
-                               placeholder="Confirm Password"/>
-                        <div class="invalid-feedback">{{ $errors->first('password_confirmation') }}</div>
-                    </div>
 
                 </div>
                 <div class="pt-4">

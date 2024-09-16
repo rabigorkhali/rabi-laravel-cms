@@ -42,4 +42,17 @@ class ProfileService extends Service
 
         return $update;
     }
+
+    public function changePasswordUpdate($request)
+    {
+        $password = trim($request->get('password'));
+        if ($password) {
+            $data['password'] = bcrypt($password);
+        }
+        $id= authUser()->id;
+        $update = $this->itemByIdentifier($id);
+        $update->fill($data)->save();
+        $update = $this->itemByIdentifier($id);
+        return $update;
+    }
 }

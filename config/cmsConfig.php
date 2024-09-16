@@ -45,6 +45,14 @@ return [
             'url' => '/profile/*',
             'method' => $putMethod,
         ],
+        [
+            'url' => '/change-password',
+            'method' => $getMethod,
+        ],
+        [
+            'url' => '/change-password',
+            'method' => $putMethod,
+        ],
 
     ],
 
