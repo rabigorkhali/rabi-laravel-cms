@@ -129,6 +129,77 @@
                                placeholder="Website"/>
                         <div class="invalid-feedback">{{ $errors->first('website') }}</div>
                     </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="sub_title">{{ 'Sub Title' }}</label>
+                        <input value="{{ $thisData?->sub_title ?? old('sub_title') }}"
+                               type="text" name="sub_title" id="sub_title"
+                               class="form-control @if ($errors->first('sub_title')) is-invalid @endif"
+                               placeholder="Sub Title"/>
+                        <div class="invalid-feedback">{{ $errors->first('sub_title') }}</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="mobile_number">{{ 'Mobile Number' }}</label>
+                        <input value="{{ $thisData?->mobile_number ?? old('mobile_number') }}"
+                               type="text" name="mobile_number" id="mobile_number"
+                               class="form-control @if ($errors->first('mobile_number')) is-invalid @endif"
+                               placeholder="Mobile Number"/>
+                        <div class="invalid-feedback">{{ $errors->first('mobile_number') }}</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="twitter_url">{{ 'Twitter URL' }}</label>
+                        <input value="{{ $thisData?->twitter_url ?? old('twitter_url') }}"
+                               type="text" name="twitter_url" id="twitter_url"
+                               class="form-control @if ($errors->first('twitter_url')) is-invalid @endif"
+                               placeholder="Twitter URL"/>
+                        <div class="invalid-feedback">{{ $errors->first('twitter_url') }}</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="facebook_url">{{ 'Facebook URL' }}</label>
+                        <input value="{{ $thisData?->facebook_url ?? old('facebook_url') }}"
+                               type="text" name="facebook_url" id="facebook_url"
+                               class="form-control @if ($errors->first('facebook_url')) is-invalid @endif"
+                               placeholder="Facebook URL"/>
+                        <div class="invalid-feedback">{{ $errors->first('facebook_url') }}</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="instagram_url">{{ 'Instagram URL' }}</label>
+                        <input value="{{ $thisData?->instagram_url ?? old('instagram_url') }}"
+                               type="text" name="instagram_url" id="instagram_url"
+                               class="form-control @if ($errors->first('instagram_url')) is-invalid @endif"
+                               placeholder="Instagram URL"/>
+                        <div class="invalid-feedback">{{ $errors->first('instagram_url') }}</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="linkedin_url">{{ 'LinkedIn URL' }}</label>
+                        <input value="{{ $thisData?->linkedin_url ?? old('linkedin_url') }}"
+                               type="text" name="linkedin_url" id="linkedin_url"
+                               class="form-control @if ($errors->first('linkedin_url')) is-invalid @endif"
+                               placeholder="LinkedIn URL"/>
+                        <div class="invalid-feedback">{{ $errors->first('linkedin_url') }}</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="top_donors_text">{{ 'Top Donors Text' }}</label>
+                        <input value="{{ $thisData?->top_donors_text ?? old('top_donors_text') }}"
+                               type="text" name="top_donors_text" id="top_donors_text"
+                               class="form-control @if ($errors->first('top_donors_text')) is-invalid @endif"
+                               placeholder="Top Donors Text"/>
+                        <div class="invalid-feedback">{{ $errors->first('top_donors_text') }}</div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="form-label" for="key_words">{{ 'Keywords' }}</label>
+                        <textarea rows="8" name="keywords" id="keywords"
+                                  class="form-control @if ($errors->first('keywords')) is-invalid @endif"
+                                  placeholder="Keywords">{{ $thisData?->keywords ?? old('keywords') }}</textarea>
+
+                        <div class="invalid-feedback">{{ $errors->first('key_words') }}</div>
+                    </div>
 
                     <div class="col-md-12">
                         <label class="form-label" for="description">{{ 'Description' }}</label>
@@ -159,6 +230,49 @@
                                 src="{{ asset($thisData?->favicon) }}" style="width: auto; height:60px;" alt="Favicon"
                                 class="img-fluid img-thumbnail"></a>
                     @endif
+                    <hr>
+                    {{__('Bank Details')}}
+                    <hr>
+                    <div class="col-md-6">
+                        <label class="form-label" for="bank_name">{{ 'Bank Name' }}</label>
+                        <input value="{{ $thisData?->bank_name ?? old('bank_name') }}"
+                               type="text" name="bank_name" id="bank_name"
+                               class="form-control @if ($errors->first('bank_name')) is-invalid @endif"
+                               placeholder="Bank Name"/>
+                        <div class="invalid-feedback">{{ $errors->first('bank_name') }}</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="bank_account_number">{{ 'Bank Account Number' }}</label>
+                        <input value="{{ $thisData?->bank_account_number ?? old('bank_account_number') }}"
+                               type="text" name="bank_account_number" id="bank_account_number"
+                               class="form-control @if ($errors->first('bank_account_number')) is-invalid @endif"
+                               placeholder="Bank Account Number"/>
+                        <div class="invalid-feedback">{{ $errors->first('bank_account_number') }}</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="bank_account_name">{{ 'Bank Account Name' }}</label>
+                        <input value="{{ $thisData?->bank_account_name ?? old('bank_account_name') }}"
+                               type="text" name="bank_account_name" id="bank_account_name"
+                               class="form-control @if ($errors->first('bank_account_name')) is-invalid @endif"
+                               placeholder="Bank Account Name"/>
+                        <div class="invalid-feedback">{{ $errors->first('bank_account_name') }}</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" for="bank_qr">{{ 'Bank QR Code' }}</label>
+                        <input type="file" name="bank_qr" id="bank_qr"
+                               class="form-control @if ($errors->first('bank_qr')) is-invalid @endif"
+                               accept="image/*"/>
+                        <div class="invalid-feedback">{{ $errors->first('bank_qr') }}</div>
+                        @if($thisData?->bank_qr)
+                            <a target="_blank" href="{{ asset($thisData?->bank_qr) }}"> <img
+                                    src="{{ asset($thisData?->bank_qr) }}" style="width: auto; height:60px;" alt="Favicon"
+                                    class="img-fluid img-thumbnail"></a>
+                        @endif
+                    </div>
+                    <hr>
                 </div>
                 @if(hasPermission('/configs/*','put'))
                     <div class="pt-4">

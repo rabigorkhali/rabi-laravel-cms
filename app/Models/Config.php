@@ -26,5 +26,17 @@ class Config extends Model
         'email',
         'website',
         'description',
+        'sub_title',
+        'mobile_number',
+        'twitter_url',
+        'facebook_url',
+        'instagram_url',
+        'linkedin_url',
+        'top_donors_text',
+        'keywords',
+        'bank_name',
+        'bank_account_number',
+        'bank_account_name',
+        'bank_qr'
     ];
 }

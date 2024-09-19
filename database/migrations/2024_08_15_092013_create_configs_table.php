@@ -29,6 +29,19 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('website')->nullable();
             $table->text('description')->nullable();
+            $table->string('sub_title')->nullable();
+            $table->string('mobile_number')->nullable();
+            $table->string('twitter_url')->nullable();
+            $table->string('facebook_url')->nullable();
+            $table->string('instagram_url')->nullable();
+            $table->string('linkedin_url')->nullable();
+            $table->text('top_donors_text')->nullable();
+            $table->string('keywords')->nullable();
+            // Bank-related fields
+            $table->string('bank_name')->nullable();
+            $table->string('bank_account_number')->nullable();
+            $table->string('bank_account_name')->nullable();
+            $table->string('bank_qr')->nullable();
             $table->timestamps();
         });
     }

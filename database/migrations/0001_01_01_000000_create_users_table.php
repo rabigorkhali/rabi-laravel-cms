@@ -30,6 +30,7 @@ return new class extends Migration
             $table->text('email_verify_token')->nullable();
             $table->rememberToken();
             $table->boolean('status')->default(1);
+            $table->boolean('is_user_verified_by_donatepur')->default(0);
             $table->timestamps();
 
         });

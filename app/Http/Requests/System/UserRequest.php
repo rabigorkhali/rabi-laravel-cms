@@ -28,10 +28,11 @@ class UserRequest extends FormRequest
             'email' => 'required|email|max:255|unique:users,email,' . $this->id,
             'password' => 'required|nullable|string|min:8|confirmed',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
-            'phone_number' => 'nullable|string|max:15|min:6',
-            'date_of_birth' => 'nullable|date|before:today',
-            'gender' => 'nullable|string|in:male,female,other',
-            'address' => 'nullable|string|max:255',
+            'mobile_number' => 'required|string|max:15|min:10',
+            'date_of_birth' => 'required|date|before:today',
+            'gender' => 'required|string|in:male,female,other',
+            'country' => 'required|string|in:nepal,india',
+            'address' => 'required|string|max:255',
             'role_id' => 'required|exists:roles,id',
         ];
         if ($this->method() == 'PUT' && $this->id == authUser()->id) {
