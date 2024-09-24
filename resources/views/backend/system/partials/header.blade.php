@@ -37,4 +37,14 @@
 <script src="{{ asset('/assets/vendor/js/helpers.js') }}"></script>
 <script src="{{ asset('/assets/vendor/js/template-customizer.js') }}"></script>
 <script src="{{ asset('/assets/js/config.js') }}"></script>
+<script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<style>
+    .cke_notifications_area{
+        display: none;
+    }
+</style>
 @yield('css')

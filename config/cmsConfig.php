@@ -9,18 +9,7 @@ $homeBaseUrl = '/home';
 $userBaseUrl = '/users';
 $roleBaseUrl = '/roles';
 $configBaseUrl = '/configs';
-$programsBaseUrl = '/programs';
-$programHighlistBaseUrl = '/program-highlights';
-$programDescriptionBaseUrl = '/program-descriptions';
-$projectBaseUrl = '/projects';
-$projectDescriptionBaseUrl = '/project-descriptions';
-$projectInitiativesBaseUrl = '/project-initiatives';
-$projectAnalysisBaseUrl = '/project-analysis';
-$partnerBaseUrl = '/partners';
-$teamBaseUrl = '/teams';
-$teamSocialSitesBaseUrl = '/team-social-sites';
-$eventBaseUrl = '/events';
-$sliderBaseurl = '/sliders';
+$pageBaseUrl = '/pages';
 
 return [
     // routes entered in this array are accessible by any user no matter what role is given
@@ -186,7 +175,6 @@ return [
                 ],
             ],
         ],
-
         [
             'name' => 'Settings',
             'icon' => "<i class='fa fa-cogs' aria-hidden='true'></i>",
@@ -232,6 +220,57 @@ return [
                     ],
                 ],
             ],
+        ],
+        [
+            'name' => 'Pages',
+            'icon' => "<i class='fa fa-page'></i>",
+            'hasSubmodules' => false,
+            'route' => $pageBaseUrl,
+            'routeIndexName' => 'pages.index',
+            'routeName' => 'pages',
+            'permissions' => [
+                [
+                    'name' => 'View Page',
+                    'route' => [
+                        'url' => $pageBaseUrl,
+                        'method' => $getMethod,
+                    ],
+                ],
+                [
+                    'name' => 'Create Page',
+                    'route' => [
+                        [
+                            'url' => $pageBaseUrl . '/create',
+                            'method' => $getMethod,
+                        ],
+                        [
+                            'url' => $pageBaseUrl,
+                            'method' => $postMethod,
+                        ],
+                    ],
+                ],
+                [
+                    'name' => 'Edit Page',
+                    'route' => [
+                        [
+                            'url' => $pageBaseUrl . '/*/edit',
+                            'method' => $getMethod,
+                        ],
+                        [
+                            'url' => $pageBaseUrl . '/*',
+                            'method' => $putMethod,
+                        ],
+                    ],
+                ],
+                [
+                    'name' => 'Delete Users',
+                    'route' => [
+                        'url' => $pageBaseUrl . '/*',
+                        'method' => $deleteMethod,
+                    ],
+                ]
+            ],
+
         ],
     ],
 ];
