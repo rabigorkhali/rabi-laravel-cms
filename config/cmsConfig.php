@@ -223,7 +223,7 @@ return [
         ],
         [
             'name' => 'Pages',
-            'icon' => "<i class='fa fa-page'></i>",
+            'icon' => "<i class='fa fa-file'></i>",
             'hasSubmodules' => false,
             'route' => $pageBaseUrl,
             'routeIndexName' => 'pages.index',
