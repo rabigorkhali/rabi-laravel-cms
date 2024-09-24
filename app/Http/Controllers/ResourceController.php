@@ -240,6 +240,7 @@ class ResourceController extends Controller
             $this->setModuleId($request->id);
             return redirect($this->getUrl())->withErrors(['success' => 'Successfully created.']);
         } catch (\Throwable $th) {
+            dd($th);
             return redirect()->back()->withErrors(['error' => 'Something went wrong.']);
         }
     }

@@ -120,7 +120,7 @@
                         <div class="invalid-feedback">{{ $errors->first('status') }}</div>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label" for="image">{{ 'image' }}</label>
+                        <label class="form-label" for="image">{{ 'Image/Profile Picture' }}</label>
                         <input value="" type="file" name="image" id="image"
                                class="form-control @if ($errors->first('image')) is-invalid @endif"/>
                         <div class="invalid-feedback">{{ $errors->first('image') }}</div>

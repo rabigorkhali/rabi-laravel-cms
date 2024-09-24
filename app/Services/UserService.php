@@ -9,9 +9,13 @@ use Illuminate\Support\Facades\Schema;
 
 class UserService extends Service
 {
+    protected $fullImageUploadPath;
+
     public function __construct(User $model)
     {
         parent::__construct($model);
+        $this->fullImageUploadPath = getImageUploadFirstLevelPath() . '/' . strtolower(class_basename(get_class($this->model))) . '/';
+
     }
 
     public function indexPageData($request)
@@ -68,11 +72,8 @@ class UserService extends Service
         $data = $request->except('_token');
         $password = trim($request->get('password'));
         $data['password'] = bcrypt($password);
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path(getImageUploadFirstLevelPath() . '/' . strtolower(class_basename(get_class($this->model)))), $filename);
-            $data['image'] = getImageUploadFirstLevelPath() . '/' . strtolower(class_basename(get_class($this->model))) . '/' . $filename;
+        if ($request->file('image')) {
+            $data['image'] = $this->fullImageUploadPath . uploadImage($this->fullImageUploadPath, 'image', true, 300, null);
         }
         return $this->model->create($data);
     }
@@ -93,12 +94,15 @@ class UserService extends Service
         $logoPath = $update->logo ?? null;
         if ($request->hasFile('image')) {
             if ($imagePath && file_exists(public_path($imagePath))) {
-                unlink(public_path($imagePath));
+                removeImage($imagePath);
             }
-            $file = $request->file('image');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path(getImageUploadFirstLevelPath() . '/' . strtolower(class_basename(get_class($this->model)))), $filename);
-            $data['image'] = getImageUploadFirstLevelPath() . '/' . strtolower(class_basename(get_class($this->model))) . '/' . $filename;
+            $data['image'] = $this->fullImageUploadPath . uploadImage($this->fullImageUploadPath, 'image', true, 300, null);
+        }
+        if ($request->hasFile('logo')) {
+            if ($logoPath && file_exists(public_path($logoPath))) {
+                removeImage($logoPath);
+            }
+            $data['logo'] = $this->fullImageUploadPath . uploadImage($this->fullImageUploadPath, 'logo', true, 300, null);
         }
         $update->fill($data)->save();
         $update = $this->itemByIdentifier($id);
@@ -109,7 +113,7 @@ class UserService extends Service
     public function delete($request, $id)
     {
         if ($id == authUser()->id) {
-            $message['error']='You cannot delete yourself.';
+            $message['error'] = 'You cannot delete yourself.';
             return $message;
         }
         $item = $this->itemByIdentifier($id);
@@ -118,16 +122,16 @@ class UserService extends Service
         $bannerPath = $update->banner ?? null;
         $thumbnailImage = $update->thumbnail_image ?? null;
         if ($imagePath && file_exists(public_path($imagePath))) {
-            unlink(public_path($imagePath));
+            removeImage($imagePath);
         }
         if ($logoPath && file_exists(public_path($logoPath))) {
-            unlink(public_path($logoPath));
+            removeImage($logoPath);
         }
         if ($bannerPath && file_exists(public_path($bannerPath))) {
-            unlink(public_path($bannerPath));
+            removeImage($bannerPath);
         }
         if ($thumbnailImage && file_exists(public_path($thumbnailImage))) {
-            unlink(public_path($thumbnailImage));
+            removeImage($thumbnailImage);
         }
         return $item->delete();
     }

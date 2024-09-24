@@ -132,7 +132,7 @@
                         <div class="invalid-feedback">{{ $errors->first('image') }}</div>
 
                     </div>
-                    <div class="col-md-6 mt-2">
+                    <div class="col-md-6 mt-4">
                         <a target="_blank" href="{{ asset($thisData?->image) }}">
                             <img src="{{ asset($thisData?->image) }}" width="100" alt="Logo" class="img-fluid"></a>
                     </div>

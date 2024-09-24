@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 
+
 function authUser()
 {
     return Auth::user();
@@ -195,3 +196,57 @@ function cssIndexProgramColorsRandom()
     $colors = ["green", "blue", "purple", "pink", "black"];
     return $colors[array_rand($colors)];
 }
+use Intervention\Image\ImageManagerStatic;
+
+function uploadImage($dir, $input, $resize = false, $width = '', $height = '')
+{
+    $directory = public_path() .'/'. $dir;
+    if (is_dir($directory) != true) \File::makeDirectory($directory, $mode = 0775, true);
+    $fileName = uniqid();
+    $fileThumbnail = $fileName . '-medium.' . Request::file($input)->getClientOriginalExtension();;
+    $fileSmall = $fileName . '-small.' . Request::file($input)->getClientOriginalExtension();;
+    $fileName = $fileName . '.' . Request::file($input)->getClientOriginalExtension();
+    $image = ImageManagerStatic::make(Request::file($input));
+    $image->orientate();
+    if ($resize) {
+        $image = $image->resize($width, $height, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+    }
+
+    $image->save($directory . '/' . $fileName, 100);
+
+    /* THUMBNAIL */
+    $directoryThumbnail = public_path() .'/'. $dir;
+    if (is_dir($directoryThumbnail) != true) \File::makeDirectory($directoryThumbnail, $mode = 0775, true);
+    $imageThumbnail = Image::make(Request::file($input));
+    $imageThumbnail = $image->resize(500, 500, function ($constraintThumbnail) {
+        $constraintThumbnail->aspectRatio();
+    });
+    $imageThumbnail->save($directoryThumbnail . '/' . $fileThumbnail, 50);
+    /* THUMBNAIL */
+
+
+    /* small */
+    $directoryThumbnail = public_path() .'/'. $dir;
+    if (is_dir($directoryThumbnail) != true) \File::makeDirectory($directoryThumbnail, $mode = 0775, true);
+    $imageSmall = Image::make(Request::file($input));
+    $imageSmall = $image->resize(70, null, function ($constraintThumbnail) {
+        $constraintThumbnail->aspectRatio();
+    });
+    $imageSmall->save($directoryThumbnail . '/' . $fileSmall, 50);
+
+
+    return $fileName;
+}
+
+function removeImage($dir)
+{
+    $f1 =  $dir ;
+    $f2 = str_replace('.', '-medium.', $f1);
+    $f3 = str_replace('.', '-small.', $f1);
+    File::delete(public_path() .'/'.$f1);
+    File::delete(public_path() .'/'.$f2);
+    File::delete(public_path() .'/'.$f3);
+}
+

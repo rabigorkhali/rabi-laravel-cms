@@ -12,10 +12,12 @@ class Service
      * @var Eloquent object
      */
     protected $model;
+    protected $fullImageUploadPath;
 
     public function __construct($model)
     {
         $this->model = $model;
+        $this->fullImageUploadPath=getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model)));
     }
 
     // get all data
@@ -61,32 +63,21 @@ class Service
     public function store($request)
     {
         $data = $request->except('_token');
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filename = time().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path(getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model)))), $filename);
-            $data['image'] = getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model))).'/'.$filename;
+        $fullImageUploadPath=getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model)));
+        if ($request->file('image')) {
+            $data['image'] = $this->fullImageUploadPath . uploadImage($this->fullImageUploadPath, 'image', true, 300, null);
         }
 
-        if ($request->hasFile('logo')) {
-            $file = $request->file('logo');
-            $filename = time().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path(getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model)))), $filename);
-            $data['logo'] = getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model))).'/'.$filename;
+        if ($request->file('logo')) {
+            $data['logo'] = $this->fullImageUploadPath . uploadImage($this->fullImageUploadPath, 'logo', true, 300, null);
         }
 
-        if ($request->hasFile('banner')) {
-            $file = $request->file('banner');
-            $filename = time().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path(getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model)))), $filename);
-            $data['banner'] = getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model))).'/'.$filename;
+        if ($request->file('banner')) {
+            $data['banner'] = $this->fullImageUploadPath . uploadImage($this->fullImageUploadPath, 'banner', true, 300, null);
         }
 
-        if ($request->hasFile('thumbnail_image')) {
-            $file = $request->file('thumbnail_image');
-            $filename = time().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path(getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model)))), $filename);
-            $data['thumbnail_image'] = getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model))).'/'.$filename;
+        if ($request->file('thumbnail_image')) {
+            $data['thumbnail_image'] = $this->fullImageUploadPath . uploadImage($this->fullImageUploadPath, 'thumbnail_image', true, 300, null);
         }
 
         return $this->model->create($data);
@@ -104,45 +95,28 @@ class Service
         $thumbnailImage = $update->thumbnail_image ?? null;
         if ($request->hasFile('image')) {
             if ($imagePath && file_exists(public_path($imagePath))) {
-                unlink(public_path($imagePath));
+                removeImage($imagePath);
             }
-            $file = $request->file('image');
-            $filename = time().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path(getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model)))), $filename);
-            $data['image'] = getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model))).'/'.$filename;
+            $data['image'] = $this->fullImageUploadPath . uploadImage($this->fullImageUploadPath, 'image', true, 300, null);
         }
         if ($request->hasFile('logo')) {
             if ($logoPath && file_exists(public_path($logoPath))) {
-                unlink(public_path($logoPath));
+                removeImage($logoPath);
             }
-
-            $file = $request->file('logo');
-            $filename = time().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path(getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model)))), $filename);
-            $data['logo'] = getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model))).'/'.$filename;
+            $data['logo'] = $this->fullImageUploadPath . uploadImage($this->fullImageUploadPath, 'logo', true, 300, null);
         }
-
         if ($request->hasFile('banner')) {
             if ($bannerPath && file_exists(public_path($bannerPath))) {
-                unlink(public_path($bannerPath));
+                removeImage($bannerPath);
             }
-            $file = $request->file('banner');
-            $filename = time().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path(getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model)))), $filename);
-            $data['banner'] = getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model))).'/'.$filename;
+            $data['banner'] = $this->fullImageUploadPath . uploadImage($this->fullImageUploadPath, 'banner', true, 300, null);
         }
-
         if ($request->hasFile('thumbnail_image')) {
             if ($thumbnailImage && file_exists(public_path($thumbnailImage))) {
-                unlink(public_path($thumbnailImage));
+                removeImage($thumbnailImage);
             }
-
-            $file = $request->file('thumbnail_image');
-            $filename = time().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path(getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model)))), $filename);
-            $data['thumbnail_image'] = getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model))).'/'.$filename;
+            $data['thumbnail_image'] = $this->fullImageUploadPath . uploadImage($this->fullImageUploadPath, 'thumbnail_image', true, 300, null);
         }
-
         $update->fill($data)->save();
         $update = $this->itemByIdentifier($id);
 
@@ -159,16 +133,16 @@ class Service
         $bannerPath = $update->banner ?? null;
         $thumbnailImage = $update->thumbnail_image ?? null;
         if ($imagePath && file_exists(public_path($imagePath))) {
-            unlink(public_path($imagePath));
+            removeImage($imagePath);
         }
         if ($logoPath && file_exists(public_path($logoPath))) {
-            unlink(public_path($logoPath));
+            removeImage($logoPath);
         }
         if ($bannerPath && file_exists(public_path($bannerPath))) {
-            unlink(public_path($bannerPath));
+            removeImage($bannerPath);
         }
         if ($thumbnailImage && file_exists(public_path($thumbnailImage))) {
-            unlink(public_path($thumbnailImage));
+            removeImage($thumbnailImage);
         }
         return $item->delete();
     }
