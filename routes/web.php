@@ -7,6 +7,7 @@ use App\Http\Controllers\System\UserController;
 use App\Http\Controllers\System\RoleController;
 use App\Http\Controllers\System\ProfileController;
 use App\Http\Controllers\System\PageController;
+use App\Http\Controllers\System\PostCategoryController;
 
 
 //Route::get('/', function () {
@@ -33,4 +34,5 @@ Route::prefix(getSystemPrefix())->middleware(['auth', 'permission.routes'])->gro
     Route::resource('/users', UserController::class, ['except' => ['show']]);
     Route::resource('/roles', RoleController::class, ['except' => ['show']]);
     Route::resource('/pages', PageController::class, ['except' => ['show']]);
+    Route::resource('/post-categories', PostCategoryController::class, ['except' => ['show']]);
 });

@@ -10,6 +10,7 @@ $userBaseUrl = '/users';
 $roleBaseUrl = '/roles';
 $configBaseUrl = '/configs';
 $pageBaseUrl = '/pages';
+$postCategoryUrl = '/post-categories';
 
 return [
     // routes entered in this array are accessible by any user no matter what role is given
@@ -214,6 +215,52 @@ return [
                             'name' => 'Delete Config',
                             'route' => [
                                 'url' => $configBaseUrl . '/*',
+                                'method' => $deleteMethod,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        [
+            'name' => 'Post',
+            'icon' => "<i class='fa fa-cogs' aria-hidden='true'></i>",
+            'hasSubmodules' => true,
+            'routeIndexNameMultipleSubMenu' => ['post-categories.index'],
+            'submodules' => [
+                [
+                    'name' => 'Category',
+                    'icon' => '<i class="fa fa-cog" aria-hidden="true"></i>',
+                    'route' => $configBaseUrl,
+                    'routeIndexName' => 'post-categories.index',
+                    'routeName' => 'post-categories',
+                    'hasSubmodules' => false,
+                    'permissions' => [
+                        [
+                            'name' => 'View Category',
+                            'route' => [
+                                'url' => $postCategoryUrl,
+                                'method' => $getMethod,
+                            ],
+                        ],
+                        [
+                            'name' => 'Create Category',
+                            'route' => [
+                                'url' => $postCategoryUrl,
+                                'method' => $postMethod,
+                            ],
+                        ],
+                        [
+                            'name' => 'Edit Category',
+                            'route' => [
+                                'url' => $postCategoryUrl . '/*',
+                                'method' => $putMethod,
+                            ],
+                        ],
+                        [
+                            'name' => 'Delete Category',
+                            'route' => [
+                                'url' => $postCategoryUrl . '/*',
                                 'method' => $deleteMethod,
                             ],
                         ],
