@@ -9,6 +9,7 @@ use App\Http\Controllers\System\ProfileController;
 use App\Http\Controllers\System\PageController;
 use App\Http\Controllers\System\PostCategoryController;
 use App\Http\Controllers\System\PostController;
+use App\Http\Controllers\System\SliderController;
 
 
 //Route::get('/', function () {
@@ -37,4 +38,5 @@ Route::prefix(getSystemPrefix())->middleware(['auth', 'permission.routes'])->gro
     Route::resource('/pages', PageController::class, ['except' => ['show']]);
     Route::resource('/post-categories', PostCategoryController::class, ['except' => ['show']]);
     Route::resource('/posts', PostController::class, ['except' => ['show']]);
+    Route::resource('/sliders', SliderController::class, ['except' => ['show']]);
 });

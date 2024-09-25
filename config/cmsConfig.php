@@ -12,6 +12,7 @@ $configBaseUrl = '/configs';
 $pageBaseUrl = '/pages';
 $postCategoryUrl = '/post-categories';
 $postUrl = '/posts';
+$sliderUrl = '/sliders';
 
 return [
     // routes entered in this array are accessible by any user no matter what role is given
@@ -350,9 +351,60 @@ return [
                     ],
                 ],
                 [
-                    'name' => 'Delete Users',
+                    'name' => 'Delete Page',
                     'route' => [
                         'url' => $pageBaseUrl . '/*',
+                        'method' => $deleteMethod,
+                    ],
+                ]
+            ],
+
+        ],
+        [
+            'name' => 'Sliders',
+            'icon' => "<i class='fa fa-sliders'></i>",
+            'hasSubmodules' => false,
+            'route' => $pageBaseUrl,
+            'routeIndexName' => 'sliders.index',
+            'routeName' => 'sliders',
+            'permissions' => [
+                [
+                    'name' => 'View Slider',
+                    'route' => [
+                        'url' => $sliderUrl,
+                        'method' => $getMethod,
+                    ],
+                ],
+                [
+                    'name' => 'Create Slider',
+                    'route' => [
+                        [
+                            'url' => $sliderUrl . '/create',
+                            'method' => $getMethod,
+                        ],
+                        [
+                            'url' => $sliderUrl,
+                            'method' => $postMethod,
+                        ],
+                    ],
+                ],
+                [
+                    'name' => 'Edit Slider',
+                    'route' => [
+                        [
+                            'url' => $sliderUrl . '/*/edit',
+                            'method' => $getMethod,
+                        ],
+                        [
+                            'url' => $sliderUrl . '/*',
+                            'method' => $putMethod,
+                        ],
+                    ],
+                ],
+                [
+                    'name' => 'Delete Slider',
+                    'route' => [
+                        'url' => $sliderUrl . '/*',
                         'method' => $deleteMethod,
                     ],
                 ]
