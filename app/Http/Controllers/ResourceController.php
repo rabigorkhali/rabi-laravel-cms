@@ -259,6 +259,7 @@ class ResourceController extends Controller
             $data['breadcrumbs'] = $this->breadcrumbForForm('Edit');
             return $this->renderView('edit', $data);
         } catch (\Throwable $th) {
+            dd($th);
             return redirect()->back()->withErrors(['error' => 'Something went wrong.']);
         }
     }

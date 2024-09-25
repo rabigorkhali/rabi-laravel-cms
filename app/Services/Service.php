@@ -17,7 +17,7 @@ class Service
     public function __construct($model)
     {
         $this->model = $model;
-        $this->fullImageUploadPath=getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model)));
+        $this->fullImageUploadPath=getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model))).'/';
     }
 
     // get all data
@@ -63,7 +63,6 @@ class Service
     public function store($request)
     {
         $data = $request->except('_token');
-        $fullImageUploadPath=getImageUploadFirstLevelPath().'/'.strtolower(class_basename(get_class($this->model)));
         if ($request->file('image')) {
             $data['image'] = $this->fullImageUploadPath . uploadImage($this->fullImageUploadPath, 'image', true, 300, null);
         }

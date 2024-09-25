@@ -11,6 +11,7 @@ $roleBaseUrl = '/roles';
 $configBaseUrl = '/configs';
 $pageBaseUrl = '/pages';
 $postCategoryUrl = '/post-categories';
+$postUrl = '/posts';
 
 return [
     // routes entered in this array are accessible by any user no matter what role is given
@@ -231,7 +232,7 @@ return [
                 [
                     'name' => 'Category',
                     'icon' => '<i class="fa fa-cog" aria-hidden="true"></i>',
-                    'route' => $configBaseUrl,
+                    'route' => $postCategoryUrl,
                     'routeIndexName' => 'post-categories.index',
                     'routeName' => 'post-categories',
                     'hasSubmodules' => false,
@@ -266,6 +267,45 @@ return [
                         ],
                     ],
                 ],
+                [
+                    'name' => 'Post',
+                    'icon' => '<i class="fa fa-cog" aria-hidden="true"></i>',
+                    'route' => $configBaseUrl,
+                    'routeIndexName' => 'posts.index',
+                    'routeName' => 'posts',
+                    'hasSubmodules' => false,
+                    'permissions' => [
+                        [
+                            'name' => 'View Post',
+                            'route' => [
+                                'url' => $postUrl,
+                                'method' => $getMethod,
+                            ],
+                        ],
+                        [
+                            'name' => 'Create Post',
+                            'route' => [
+                                'url' => $postUrl,
+                                'method' => $postMethod,
+                            ],
+                        ],
+                        [
+                            'name' => 'Edit Post',
+                            'route' => [
+                                'url' => $postUrl . '/*',
+                                'method' => $putMethod,
+                            ],
+                        ],
+                        [
+                            'name' => 'Delete Post',
+                            'route' => [
+                                'url' => $postUrl . '/*',
+                                'method' => $deleteMethod,
+                            ],
+                        ],
+                    ],
+                ],
+
             ],
         ],
         [

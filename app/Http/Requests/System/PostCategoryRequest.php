@@ -25,7 +25,7 @@ class PostCategoryRequest extends FormRequest
     {
         $validation = [
             'name' => 'required|max:255',
-            'slug' => 'required|max:300|unique:pages,slug,'.$this->id,
+            'slug' => 'required|max:300|unique:post_categories,slug,'.$this->id,
             'status' => 'nullable|boolean',
         ];
         return $validation;
