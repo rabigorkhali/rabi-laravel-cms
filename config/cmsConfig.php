@@ -225,9 +225,9 @@ return [
         ],
         [
             'name' => 'Post',
-            'icon' => "<i class='fa fa-cogs' aria-hidden='true'></i>",
+            'icon' => "<i class='fa fa-signs-post' aria-hidden='true'></i>",
             'hasSubmodules' => true,
-            'routeIndexNameMultipleSubMenu' => ['post-categories.index'],
+            'routeIndexNameMultipleSubMenu' => ['post-categories.index','posts.index'],
             'submodules' => [
                 [
                     'name' => 'Category',
